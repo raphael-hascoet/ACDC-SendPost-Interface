@@ -34,9 +34,9 @@ This class represents an object "Post" that has different entries and the descri
 
 // Others
 - [x] String toString()
-- [x] writeFile(String content)         // create a file .markdown in the "BLOG/\_post" directory
-- [x] String toMarkdown()               // generate the content of the .markdown file
-- [x] addCategory(string newCategory)   // add a new category to the file "categories.txt" located in "BLOG", if the category                                            entered doesn't exist in the file
-- [x] ArrayList<String> getCat()        // get the different categories listed in the file "categories.txt"
-- [ ] seeDemo()                         // execute the "build" and "serve" jekyll commands
-- [ ] pushGit()                         // execute the git commands to push the full directory on git
+- [x] writeFile(String content)         **// create a file .markdown in the "BLOG/\_post" directory**
+- [x] String toMarkdown()               **// generate the content of the .markdown file**
+- [x] addCategory(string newCategory)   **// add a new category to the file "categories.txt" located in "BLOG", if the category entered doesn't exist in the file**
+- [x] ArrayList<String> getCat()        **// get the different categories listed in the file "categories.txt"**
+- [ ] seeDemo()                         **// execute the "build" and "serve" jekyll commands**
+- [ ] pushGit()                         **// execute the git commands to push the full directory on git**
