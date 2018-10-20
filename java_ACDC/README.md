@@ -23,7 +23,6 @@ This class represents an object "Post" that has different entries and the descri
 - [x] string getCategory()
 - [x] string getContent()
 - [ ] string getAuthor()
-- [ ] string getPath()
 
 
 - [x] setTitle(string title)
@@ -31,7 +30,6 @@ This class represents an object "Post" that has different entries and the descri
 - [x] setCategory(string category)
 - [x] setContent(string content)
 - [ ] setAuthor(string auth)
-- [ ] setPath(string path)
 
 
 - [x] writeFile(string path, string category, string date, string content, string auth, string title)
