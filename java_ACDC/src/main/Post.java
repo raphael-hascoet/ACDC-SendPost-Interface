@@ -22,13 +22,15 @@ public class Post {
 	private String date;
 	private String categories;
 	private String content; 
+	private String author; 
 	
 	// Constructor
-	public Post(String t, String d, String cat, String cont) {
+	public Post(String t, String d, String cat, String cont, String aut) {
 		this.title = t;
 		this.date = d;
 		this.categories = cat;
 		this.content = cont;
+		this.author = aut;
 	}
 
 	
@@ -64,6 +66,14 @@ public class Post {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	/** Method to add a category to a .txt File */
@@ -104,17 +114,16 @@ public class Post {
 		  }
 	}
 	
-	/** Method to create a markdown */
+	/** Method to write the content of the .markdown file */
 	public String toMarkdown() {
-		return "--- \nlayout: post \ntitle: \"" + this.title + "\" \ndate: " + this.date + " \ncategories: " + this.categories + " \n---" + "\n" + this.content;
+		return "--- \nlayout: post \ntitle: \"" + this.title + "\" \ndate: " + this.date + " \ncategories: " + this.categories + "\nauthor: " + this.author + " \n---" + "\n" + this.content;
 	}
 	
-	/** Method to write a File */
+	/** Method to write a .markdown file */
 	public void writeFile(String content) {
-		// Writing of the markdown file
+		// Writing of the .markdown file's path
 		String PATH = ".." + File.separator + "BLOG" + File.separator + "_posts" + File.separator + this.date + "-" + this.title + ".markdown";
 		try{
-			// creates a file .markdown : java-project_ACDC/src/post/YYYY-MM-DD-title.markdown
 			File f = new File(PATH); 
 			f.createNewFile();	
 			// edition of the file created
@@ -126,6 +135,22 @@ public class Post {
 		} catch(IOException ioException) {
 			ioException.printStackTrace();
 		}
+	}
+	
+	/** Method to build and serve the site with jekyll */
+	public void seeDemo() {
+		String[] commands = {"bundle exec jekyll build", "bundle exec jekyll serve"};
+		Runtime rt = Runtime.getRuntime();
+		try {
+			Process pr = rt.exec(commands);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/** Method to push the files on the git */ 
+	public void pushGit() {
+		
 	}
 	
 	/* toString */

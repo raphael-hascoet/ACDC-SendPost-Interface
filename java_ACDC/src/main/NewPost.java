@@ -33,11 +33,16 @@ public class NewPost {
 		String date = null; 
 		String categories = null;
 		String content = null;
+		String author = null;
 		
 		// Creating the object
-		Post p = new Post(title, date, categories, content);
+		Post p = new Post(title, date, categories, content, author);
 		
 		/* Asking the user to give the different entries	*/
+		// Ask for the author's name
+		System.out.println("What is your name ?");
+		p.setAuthor(sc.nextLine());
+		
 		// Give a title
 		System.out.println("Please give a title to your article");
 		// .trim() : clean the title's " " to avoid problem in the file path
@@ -64,9 +69,10 @@ public class NewPost {
 		
 		// Resume
 		System.out.println(p.toString());
+		System.out.println(p.toMarkdown());
 		
 		// Writing the file in .markdown file
-		p.writeFile(p.toMarkdown());
+		//p.writeFile(p.toMarkdown());
 		
 		System.out.println("# You finished to write your article #");
 		System.out.println("## Let's open your document in your web browser ##");
