@@ -18,29 +18,25 @@ This class represents an object "Post" that has different entries and the descri
 
 *written with [Evrard-Nil DAILLET](https://github.com/Evrard-Nil)*
 
-- [x] string getTitle()
-- [x] string getDate()
-- [x] string getCategory()
-- [x] string getContent()
-- [ ] string getAuthor()
+// Getters
+- [x] String getTitle()
+- [x] String getDate()
+- [x] String getCategory()
+- [x] String getContent()
+- [x] String getAuthor()
 
+// Setters
+- [x] setTitle(String title)
+- [x] setDate(String date)
+- [x] setCategory(String category)
+- [x] setContent(String content)
+- [x] setAuthor(String auth)
 
-- [x] setTitle(string title)
-- [x] setDate(string date)
-- [x] setCategory(string category)
-- [x] setContent(string content)
-- [ ] setAuthor(string auth)
-
-
-- [x] writeFile(string path, string category, string date, string content, string auth, string title)
-- [x] addCategory(string newCategory)
-- [x] string[] getCat()
-- [ ] launchDemo()
-- [ ] pushGit()
-
-// Pour la mise en forme du markdown (optionnel ?)
-
-- [ ] string urlMaker( string url, string text) // [link to Google!](http://google.com)
-- [ ] string setBold( string txt)
-- [ ] string setItalic(string txt)
-- [ ] string setUnderline(string txt)
+// Others
+- [x] String toString()
+- [x] writeFile(String content)         // create a file .markdown in the "BLOG/\_post" directory
+- [x] String toMarkdown()               // generate the content of the .markdown file
+- [x] addCategory(string newCategory)   // add a new category to the file "categories.txt" located in "BLOG", if the category                                            entered doesn't exist in the file
+- [x] ArrayList<String> getCat()        // get the different categories listed in the file "categories.txt"
+- [ ] seeDemo()                         // execute the "build" and "serve" jekyll commands
+- [ ] pushGit()                         // execute the git commands to push the full directory on git
