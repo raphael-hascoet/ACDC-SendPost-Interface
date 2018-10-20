@@ -1,7 +1,0 @@
---- 
-layout: post 
-title: "t" 
-date: 2018-06-06 
-categories: post 
----
-fjksdvlefdvj

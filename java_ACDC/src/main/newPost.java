@@ -53,7 +53,7 @@ public class newPost {
 		// Give a category
 		System.out.println("Please enter the category of this article");
 		List<String> cat = p.getCat();
-		System.out.println(cat);	// prints the different categories that already exists
+		System.out.println(cat + " or add new");	// prints the different categories that already exists
 		p.setCategories(sc.nextLine());
 		p.addCategory(p.getCategories()); // if the category written doesn't exists, write the new category in the file categories.txt
 		
@@ -62,8 +62,11 @@ public class newPost {
 		p.setContent(sc.nextLine());
 		sc.close();
 		
-		
+		// Resume
 		System.out.println(p.toString());
+		
+		// Writing the file in .markdown file
+		p.writeFile(p.toMarkdown());
 	}
 
 }
