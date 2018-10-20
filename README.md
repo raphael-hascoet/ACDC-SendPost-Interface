@@ -11,25 +11,25 @@ The goal of this project is to easily make new entries on a website built on top
 
 *written with [Evrard-Nil DAILLET](https://github.com/Evrard-Nil)*
 
-- [ ] string getTitle()
-- [ ] string getDate()
-- [ ] string getCategory()
-- [ ] string getContent()
+- [x] string getTitle()
+- [x] string getDate()
+- [x] string getCategory()
+- [x] string getContent()
 - [ ] string getAuthor()
 - [ ] string getPath()
 
 
-- [ ] setTitle(string title)
-- [ ] setDate(string date)
-- [ ] setCategory(string category)
-- [ ] setContent(string content)
+- [x] setTitle(string title)
+- [x] setDate(string date)
+- [x] setCategory(string category)
+- [x] setContent(string content)
 - [ ] setAuthor(string auth)
 - [ ] setPath(string path)
 
 
-- [ ] writeFile(string path, string category, string date, string content, string auth, string title)
-- [ ] addCategery(string newCategory)
-- [ ] string[] getAllCateg()
+- [x] writeFile(string path, string category, string date, string content, string auth, string title)
+- [x] addCategory(string newCategory)
+- [x] string[] getCat()
 - [ ] launchDemo()
 - [ ] pushGit()
 
