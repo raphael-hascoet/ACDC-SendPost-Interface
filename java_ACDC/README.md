@@ -19,8 +19,8 @@ This class represents an object "Post" that has different entries and the descri
 *written with [Evrard-Nil DAILLET](https://github.com/Evrard-Nil)*
 
 // Getters
-- [x] String getTitle()
-- [x] String getDate()
+- [x] 'String getTitle()'
+- [x] 'String getDate()'
 - [x] String getCategory()
 - [x] String getContent()
 - [x] String getAuthor()
