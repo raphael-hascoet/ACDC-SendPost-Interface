@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @version 1.2
  */
 
-public class newPost {
+public class NewPost {
 
 	/** Method used to verify if the entered date verify the imposed format */
 	public static boolean isDateValid(String d) 
@@ -67,6 +67,9 @@ public class newPost {
 		
 		// Writing the file in .markdown file
 		p.writeFile(p.toMarkdown());
+		
+		System.out.println("# You finished to write your article #");
+		System.out.println("## Let's open your document in your web browser ##");
 	}
 
 }
