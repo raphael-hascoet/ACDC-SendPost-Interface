@@ -140,9 +140,11 @@ public class Post {
 	/** Method to build and serve the site with jekyll */
 	public void seeDemo() {
 		String[] commands = {"bundle exec jekyll build", "bundle exec jekyll serve"};
+		//String commands = "ping Google.com";
 		Runtime rt = Runtime.getRuntime();
 		try {
 			Process pr = rt.exec(commands);
+			System.out.println("To see what you did, you can open the link above and check if it suits you. \nclick here or open it on your web browser : http://127.0.0.1:4000/blog/");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

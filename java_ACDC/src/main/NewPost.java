@@ -68,11 +68,14 @@ public class NewPost {
 		sc.close();
 		
 		// Resume
-		System.out.println(p.toString());
-		System.out.println(p.toMarkdown());
+		//System.out.println(p.toString());
+		//System.out.println(p.toMarkdown());
 		
 		// Writing the file in .markdown file
-		//p.writeFile(p.toMarkdown());
+		p.writeFile(p.toMarkdown());
+		
+		// Build and serve jekyll to generate website with the new article
+		p.seeDemo();
 		
 		System.out.println("# You finished to write your article #");
 		System.out.println("## Let's open your document in your web browser ##");
