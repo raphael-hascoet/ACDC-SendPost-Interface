@@ -75,10 +75,13 @@ public class NewPost {
 		p.writeFile(p.toMarkdown());
 		
 		// Build and serve jekyll to generate website with the new article
-		p.seeDemo();
+		try {
+			p.seeDemo();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		System.out.println("# You finished to write your article #");
-		System.out.println("## Let's open your document in your web browser ##");
+		System.out.println("END");
 	}
 
 }

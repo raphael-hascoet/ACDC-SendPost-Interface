@@ -6,8 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * This class represent an object 'Post' that has different entries and that describes an article
@@ -78,11 +83,12 @@ public class Post {
 
 	/** Method to add a category to a .txt File */
 	public void addCategory(String c) {
+		//String homeDirectory = System.getProperty("user.home");
 		List<String> cat = this.getCat();
 		if(cat.contains(c) == false) {
 			try
 			{
-				BufferedWriter bw = new BufferedWriter(new FileWriter(".." + File.separator + "BLOG" + File.separator + "categories.txt", true));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(".." + /*homeDirectory +*/ File.separator + "BLOG" + File.separator + "categories.txt", true));
 			    bw.append(c+"\n");
 			    bw.close();
 			}
@@ -95,10 +101,11 @@ public class Post {
 	
 	/** Method to read the categories in the file categories.txt */
 	public List<String> getCat() {
+		//String homeDirectory = System.getProperty("user.home");
 		List<String> cat = new ArrayList<String>();
 		try
 		{
-			BufferedReader reader = new BufferedReader(new FileReader(".." + File.separator + "BLOG" + File.separator + "categories.txt"));
+			BufferedReader reader = new BufferedReader(new FileReader(".." + /*homeDirectory +*/ File.separator + "BLOG" + File.separator + "categories.txt"));
 		    String line;
 		    while ((line = reader.readLine()) != null)
 		    {
@@ -121,6 +128,7 @@ public class Post {
 	
 	/** Method to write a .markdown file */
 	public void writeFile(String content) {
+		String homeDirectory = System.getProperty("user.home");
 		// Writing of the .markdown file's path
 		String PATH = ".." + File.separator + "BLOG" + File.separator + "_posts" + File.separator + this.date + "-" + this.title + ".markdown";
 		try{
@@ -137,15 +145,51 @@ public class Post {
 		}
 	}
 	
-	/** Method to build and serve the site with jekyll */
-	public void seeDemo() {
-		String[] commands = {"bundle exec jekyll build", "bundle exec jekyll serve"};
-		//String commands = "ping Google.com";
-		Runtime rt = Runtime.getRuntime();
+	/* TO RUN A COMMAND IN THE OS's TERMINAL */
+	
+	// Consumes an input stream
+	private static class StreamGobbler implements Runnable {
+	    private InputStream inputStream;
+	    private Consumer<String> consumer;
+	 
+	    public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
+	        this.inputStream = inputStream;
+	        this.consumer = consumer;
+	    }
+	 
+	    @Override
+	    public void run() {
+	        new BufferedReader(new InputStreamReader(inputStream)).lines().forEach(consumer);
+	    }
+	}
+	
+	/** Method to execute the command : "bundle exec jekyll serve" that allows us to visualize our article on a local web site
+	 * @throws IOException */
+	// /!\ Not Working /!\
+	public void seeDemo() throws IOException {
+		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another
+		ProcessBuilder builder = new ProcessBuilder();
 		try {
-			Process pr = rt.exec(commands);
-			System.out.println("To see what you did, you can open the link above and check if it suits you. \nclick here or open it on your web browser : http://127.0.0.1:4000/blog/");
-		} catch (IOException e) {
+			if (isWindows) {
+				// if windows 
+				//builder.command("cmd.exe", "/c", "dir");
+				builder.command("cmd.exe", "/c", "bundle exec jekyll serve -o");	// create a local address to visualize the web site
+			} else {
+				// else
+				//builder.command("sh", "-c", "ls");
+				builder.command("sh", "-c", "bundle exec jekyll serve -o");	// create a local address to visualize the web site   
+			}
+			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/BLOG"));		// defines the directory where we should run the commands
+			Process process = builder.start();		// start the process
+			// prints on the terminal what we get after running the commands
+			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
+			Executors.newSingleThreadExecutor().submit(streamGobbler);
+			TimeUnit.SECONDS.sleep(5);
+			System.out.println("Press \"enter\" to end the demo");
+			System.in.read();
+			process.destroy();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
