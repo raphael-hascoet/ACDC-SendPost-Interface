@@ -165,9 +165,9 @@ public class Post {
 	}
 	
 	/** Method to execute the command : "bundle exec jekyll serve" that allows us to visualize our article on a local web site
-	 * @throws IOException */
+	 * @throws InterruptedException */
 	// Working with the full path for jekyll
-	public void seeDemo() throws IOException {
+	public void seeDemo() throws InterruptedException {
 		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another
 		ProcessBuilder builder = new ProcessBuilder();
 		try {
@@ -178,7 +178,7 @@ public class Post {
 				// else
 				builder.command("sh", "-c", "bundle exec jekyll serve -o");	// create a local address to visualize the web site   
 			}
-			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/BLOG"));		// defines the directory where we should run the commands
+			builder.directory(new File(System.getProperty("user.home")+"/IMT-A/developpement/project-ACDC/BLOG/"));		// defines the directory where we should run the commands
 			Process process = builder.start();		// start the process
 			// prints on the terminal what we get after running the commands
 			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
@@ -187,7 +187,7 @@ public class Post {
 			System.out.println("Press \"enter\" to end the demo");
 			System.in.read();
 			process.destroy();
-		} catch (InterruptedException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -206,7 +206,7 @@ public class Post {
 				// else
 				builder.command("sh", "-c", "git add . ; git commit -m " + c);	// create a local address to visualize the web site   
 			}
-			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC"));		// defines the directory where we should run the commands
+			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/"));		// defines the directory where we should run the commands
 			Process process = builder.start();		// start the process
 			// prints on the terminal what we get after running the commands
 			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
@@ -233,7 +233,7 @@ public class Post {
 				// else
 				builder.command("sh", "-c", "git config --global user.name \"" + use + "\" ; git config --global user.password \"" + pas + "\" ; git push");	// create a local address to visualize the web site   
 			}
-			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/BLOG"));		// defines the directory where we should run the commands
+			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/"));		// defines the directory where we should run the commands
 			Process process = builder.start();		// start the process
 			// prints on the terminal what we get after running the commands
 			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
