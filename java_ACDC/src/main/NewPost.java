@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,7 +66,6 @@ public class NewPost {
 		// Write content
 		System.out.println("Now, you can write your article");
 		p.setContent(sc.nextLine());
-		sc.close();
 		
 		// Resume
 		//System.out.println(p.toString());
@@ -81,6 +81,27 @@ public class NewPost {
 			e.printStackTrace();
 		}
 		
+		System.out.println("Write your commit for GitHub");
+		String commit = sc.nextLine();
+		try {
+			p.commitGit(commit);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("What is your GitHub's username ?");
+		String username = sc.nextLine();
+		System.out.println("What is your GitHub's password ?");
+		String password = sc.nextLine();
+		try {
+			p.pushGit(username, password);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		sc.close();
 		System.out.println("END");
 	}
 

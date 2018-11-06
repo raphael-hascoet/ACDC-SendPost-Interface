@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -165,18 +166,16 @@ public class Post {
 	
 	/** Method to execute the command : "bundle exec jekyll serve" that allows us to visualize our article on a local web site
 	 * @throws IOException */
-	// /!\ Not Working /!\
+	// Working with the full path for jekyll
 	public void seeDemo() throws IOException {
 		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another
 		ProcessBuilder builder = new ProcessBuilder();
 		try {
 			if (isWindows) {
-				// if windows 
-				//builder.command("cmd.exe", "/c", "dir");
+				// if os = windows 
 				builder.command("cmd.exe", "/c", "bundle exec jekyll serve -o");	// create a local address to visualize the web site
 			} else {
 				// else
-				//builder.command("sh", "-c", "ls");
 				builder.command("sh", "-c", "bundle exec jekyll serve -o");	// create a local address to visualize the web site   
 			}
 			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/BLOG"));		// defines the directory where we should run the commands
@@ -194,9 +193,58 @@ public class Post {
 		}
 	}
 	
-	/** Method to push the files on the git */ 
-	public void pushGit() {
-		
+	/** Method to commit before pushing on git 
+	 * @throws IOException */
+	public void commitGit(String c) throws IOException {
+		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another
+		ProcessBuilder builder = new ProcessBuilder();
+		try {
+			if (isWindows) {
+				// if os = windows 
+				builder.command("cmd.exe", "/c", "git add . ; git commit -m " + c);	// create a local address to visualize the web site
+			} else {
+				// else
+				builder.command("sh", "-c", "git add . ; git commit -m " + c);	// create a local address to visualize the web site   
+			}
+			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC"));		// defines the directory where we should run the commands
+			Process process = builder.start();		// start the process
+			// prints on the terminal what we get after running the commands
+			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
+			Executors.newSingleThreadExecutor().submit(streamGobbler);
+			TimeUnit.SECONDS.sleep(5);
+			int exitCode = process.waitFor();
+			assert exitCode == 0;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/** Method to push the files on the git 
+	 * @throws IOException */ 
+	public void pushGit(String use, String pas) throws IOException {
+		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another
+		ProcessBuilder builder = new ProcessBuilder();
+		try {
+			if (isWindows) {
+				// if os = windows 
+				builder.command("cmd.exe", "/c", "git config --global user.name \"" + use + "\" ; git config --global user.password \"" + pas + "\" ; git push");	// create a local address to visualize the web site
+			} else {
+				// else
+				builder.command("sh", "-c", "git config --global user.name \"" + use + "\" ; git config --global user.password \"" + pas + "\" ; git push");	// create a local address to visualize the web site   
+			}
+			builder.directory(new File(System.getProperty("user.home") + "/IMT-A/developpement/project-ACDC/BLOG"));		// defines the directory where we should run the commands
+			Process process = builder.start();		// start the process
+			// prints on the terminal what we get after running the commands
+			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
+			Executors.newSingleThreadExecutor().submit(streamGobbler);
+			TimeUnit.SECONDS.sleep(5);
+			int exitCode = process.waitFor();
+			assert exitCode == 0;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/* toString */
