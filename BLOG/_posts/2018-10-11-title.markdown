@@ -1,8 +1,0 @@
---- 
-layout: post 
-title: "title" 
-date: 2018-10-11 
-categories: test
-author: axel 
----
-jvev

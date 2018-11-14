@@ -21,7 +21,6 @@ import java.util.function.Consumer;
  * @author Axel COUDRAY
  * @date 20/10/2018
  */
-
 public class Post {
 	// Attributes
 	private String title;
@@ -41,43 +40,82 @@ public class Post {
 
 	
 	// Methods
-	/* Getters & setters */
+	/**
+	 * gives the title
+	 * @return title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * set a new title
+	 * @param title
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * gives the date
+	 * @return date
+	 */
 	public String getDate() {
 		return date;
 	}
 
+	/**
+	 * set a new date
+	 * @param date
+	 */
 	public void setDate(String date) {
 		this.date = date;
 	}
 
+	/**
+	 * gives the category
+	 * @return categories
+	 */
 	public String getCategories() {
 		return categories;
 	}
 
+	/**
+	 * set a new category
+	 * @param categories
+	 */
 	public void setCategories(String categories) {
 		this.categories = categories;
 	}
 
+	/**
+	 * gives the content
+	 * @return content
+	 */
 	public String getContent() {
 		return content;
 	}
 
+	/**
+	 * set a new content
+	 * @param content
+	 */
 	public void setContent(String content) {
 		this.content = content;
 	}
 	
+	/**
+	 * gives the author
+	 * @return author
+	 */
 	public String getAuthor() {
 		return author;
 	}
 
+	/**
+	 * set a new author
+	 * @param author
+	 */
 	public void setAuthor(String author) {
 		this.author = author;
 	}
@@ -125,25 +163,6 @@ public class Post {
 	/** Method to write the content of the .markdown file */
 	public String toMarkdown() {
 		return "--- \nlayout: post \ntitle: \"" + this.title + "\" \ndate: " + this.date + " \ncategories: " + this.categories + "\nauthor: " + this.author + " \n---" + "\n" + this.content;
-	}
-	
-	/** Method to write a .markdown file */
-	public void writeFile(String content) {
-		String homeDirectory = System.getProperty("user.home");
-		// Writing of the .markdown file's path
-		String PATH = ".." + File.separator + "BLOG" + File.separator + "_posts" + File.separator + this.date + "-" + this.title + ".markdown";
-		try{
-			File f = new File(PATH); 
-			f.createNewFile();	
-			// edition of the file created
-			FileWriter fw = new FileWriter(f);
-			fw.write(content);
-			fw.flush();
-			fw.close();
-			System.out.println("Your file has been created at the path : \"" + PATH + "\"");
-		} catch(IOException ioException) {
-			ioException.printStackTrace();
-		}
 	}
 	
 	/* TO RUN A COMMAND IN THE OS's TERMINAL */

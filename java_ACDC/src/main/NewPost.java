@@ -7,10 +7,9 @@ import java.util.Scanner;
 /**
  * This class is the main class, it allows a person to create a new article
  * @author Axel COUDRAY
- * @date 20/10/2018
- * @version 1.2
+ * @date 08/11/2018
+ * @version 1.3
  */
-
 public class NewPost {
 
 	/** Method used to verify if the entered date verify the imposed format */
@@ -35,9 +34,11 @@ public class NewPost {
 		String categories = null;
 		String content = null;
 		String author = null;
+		String path = "/home/axelc/IMT-A/developpement/project-ACDC/BLOG/"; 
 		
-		// Creating the object
+		// Creating the objects
 		Post p = new Post(title, date, categories, content, author);
+		Tools t = new Tools(path);
 		
 		/* Asking the user to give the different entries	*/
 		// Ask for the author's name
@@ -72,9 +73,17 @@ public class NewPost {
 		//System.out.println(p.toMarkdown());
 		
 		// Writing the file in .markdown file
-		p.writeFile(p.toMarkdown());
+		t.writeFile(p.toMarkdown(), p.getTitle(), p.getDate());
+		/*try {
+			t.executeCommand("ls");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		t.seeDemo();
 		
-		// Build and serve jekyll to generate website with the new article
+	/*	// Build 
+	 * and serve jekyll to generate website with the new article
 		try {
 			p.seeDemo();
 		} catch (Exception e) {
@@ -100,7 +109,7 @@ public class NewPost {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+	*/
 		sc.close();
 		System.out.println("END");
 	}
