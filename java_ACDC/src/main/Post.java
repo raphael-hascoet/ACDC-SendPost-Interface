@@ -119,46 +119,6 @@ public class Post {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-
-	/** Method to add a category to a .txt File */
-	public void addCategory(String c) {
-		//String homeDirectory = System.getProperty("user.home");
-		List<String> cat = this.getCat();
-		if(cat.contains(c) == false) {
-			try
-			{
-				BufferedWriter bw = new BufferedWriter(new FileWriter(".." + /*homeDirectory +*/ File.separator + "BLOG" + File.separator + "categories.txt", true));
-			    bw.append(c+"\n");
-			    bw.close();
-			}
-			catch (Exception e)
-			{
-			    e.printStackTrace();
-			}	
-		}
-	}
-	
-	/** Method to read the categories in the file categories.txt */
-	public List<String> getCat() {
-		//String homeDirectory = System.getProperty("user.home");
-		List<String> cat = new ArrayList<String>();
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(".." + /*homeDirectory +*/ File.separator + "BLOG" + File.separator + "categories.txt"));
-		    String line;
-		    while ((line = reader.readLine()) != null)
-		    {
-		    	cat.add(line);
-		    }
-		    reader.close();
-		    return cat;
-		  }
-		  catch (Exception e)
-		  {  
-		  	e.printStackTrace();
-		  	return null;
-		  }
-	}
 	
 	/** Method to write the content of the .markdown file */
 	public String toMarkdown() {

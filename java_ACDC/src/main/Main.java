@@ -14,9 +14,14 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		// CREATION DES OBJETS
-		Git gitUser = new Git();
-		Tools outil = new Tools();
+		// Uncomment the next line if you want to try without doing .jar file
+		// Change the name of the path so the program can acces to your '/project-ACDC/BLOG/'
+		//Tools outil = new Tools("/home/axelc/IMT-A/developpement/project-ACDC/BLOG/");
 		
+		// Comment the two next lines to try without doing .jar file
+		String currentDirectory = System.getProperty("user.dir");
+		Tools outil = new Tools(currentDirectory + File.separator + "BLOG" + File.separator);
+
 		// définition des variables necessaire à la classe "post"
 		String title = null; 
 		String date = null;
@@ -24,12 +29,8 @@ public class Main {
 		String content = null; 
 		String author = null; 
 		Post post = new Post(title, date, categories, content, author);
-		List<String> cat = post.getCat();
+		List<String> cat = outil.getCategory();
 		
-		// DEFINITION DES REPERTOIRES
-		gitUser.setLocalRepository("/home/axelc/IMT-A/developpement/project-ACDC/BLOG/");
-		gitUser.setGithubRepository("");
-		/*
 		// DEMANDE D'INFORMATIONS A L'UTILISATEUR
 		System.out.println("Auteur de la publication");
 		author = outil.getUserInput();
@@ -45,6 +46,7 @@ public class Main {
 		
 		System.out.println("Catégorie de la publication :\n" + cat + " ou ajouter une catégorie");
 		categories = outil.getUserInput();
+		outil.addCategory(categories);
 		post.setCategories(categories);
 		
 		System.out.println("Contenu de la publication");
@@ -52,13 +54,19 @@ public class Main {
 		post.setContent(content);
 
 		// ECRIRE LE FICHIER .MARKDOWN
-		String markdownFilePath = gitUser.getLocalRepository() + "_posts" + File.separator;
+		String markdownFilePath = outil.getLocalRepository() + "_posts" + File.separator;
 		outil.writeFile(post.toMarkdown(), post.getTitle(), post.getDate(), markdownFilePath);
-		*/
+		
 		// AFFICHAGE DE LA DEMO
-		outil.executeCommand("bundle exec jekyll serve -o", gitUser.getLocalRepository());
+		outil.executeCommand("bundle exec jekyll serve -o", outil.getLocalRepository(), true);
 		
+		// GIT PUSH THE BLOG FILE 
+		outil.executeCommand("git add .", outil.getLocalRepository(), false);
+		outil.executeCommand("git commit -m \"new article\"", outil.getLocalRepository(), false);
+		outil.executeCommand("git push", outil.getLocalRepository(), false);
 		
+		// ENDING THE PROGRAM
+		System.exit(0);
 	}
 
 }
