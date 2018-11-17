@@ -7,9 +7,9 @@
 L'object de celui-ci est de pouvoir facilement ajouter de nouveaux articles sur un site web utilisant jekyll (plus d'informations sur https://jekyllrb.com) 
 
 ## A propos du projet ##
-Afin que tout fonctionne correctement il faudra lier votre dépôt github correspondant à votre pc à l'aide d'une clé ssh. Pour se faire, suivre les étapes énnoncées dans la partie [Set up 'git push' with an ssh key](#ssh-key).
+Afin que tout fonctionne correctement il faudra lier votre dépôt github correspondant à votre pc à l'aide d'une clé ssh. Pour se faire, suivre les étapes énnoncées dans la partie [Set up 'git push' with an ssh key]{#ssh-key}.
 
-### Set up 'git push' with an ssh key ### (#ssh-key)
+### Set up 'git push' with an ssh key ### {#ssh-key}
 Create a repo.
 Make sure there is at least one file in it (even just the README)
 Generate ssh key:
