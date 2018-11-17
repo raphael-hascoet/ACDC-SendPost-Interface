@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 /**
  * This class provides the methods needed to setup our application
  * @author Axel COUDRAY
+ * @date 17/11/2018
  */
 public class Tools {
 	
@@ -150,7 +151,9 @@ public class Tools {
 		
 	/**
 	 * Method to execute a command depending of the OS
-	 * @throws InterruptedException 
+	 * @param commande - String of the command to execute
+	 * @param path - String of the path where the command should be executed
+	 * @param stopThread - Boolean used to know if we need to stop the process by ourself or not 
 	 */
 	public void executeCommand(String commande, String Path, boolean stopThread) {
 		final boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");	// To verify if the OS is windows or another

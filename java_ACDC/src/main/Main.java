@@ -3,10 +3,10 @@ package main;
 import java.io.File;
 import java.util.List;
 /**
- * This class provides the methods needed to setup our application
+ * This is the main class
  * @author Axel COUDRAY
- * @date 15/11/2018
- * @version 1.3
+ * @date 17/11/2018
+ * @version 1.4
  */
 public class Main {
 

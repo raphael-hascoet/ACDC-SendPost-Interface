@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 /**
  * This class represent an object 'Post' that has different entries and that describes an article
- * This article must have : a title, a date (YYYY-MM-DD), a category, and content
+ * This article must have : a title, a date (YYYY-MM-DD), a category, an author, and content
  * @author Axel COUDRAY
  * @date 20/10/2018
  */
