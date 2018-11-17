@@ -12,7 +12,10 @@ Le but du projet est de pouvoir facilement ajouter de nouveaux articles sur un s
 
 J'ai choisi d'implémenter une solution qui se base sur le diagramme de classe suivant : 
 ![alt-text](diagramme-de-classe.png)
-
+On y retrouve donc :
+- une classe `Main` dans laquelle se trouvent la méthode `main`, les différents appels aux méthodes implémentées dans les deux autres classes sont fait dans celle-ci. 
+- une classe `Tools` qui fournit l'ensemble des méthodes permettant de gérer notre programme, comme par exemple la méthode qui permet d'écrire un fichier, ou celle permettant d'exécuter une méthode...
+- une classe `Post` dans laquelle on stocke les différentes informations liées au nouveau poste créé comme par exemple son titre, son auteur, son contenu...
 
 ### Mise en place ###
 Afin que tout fonctionne correctement il faudra lier votre dépôt github correspondant à votre pc à l'aide d'une clé ssh. Pour se faire, suivre les étapes énnoncées dans la partie [Set up 'git push' with an ssh key](#ssh-key).
