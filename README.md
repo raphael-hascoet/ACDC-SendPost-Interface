@@ -9,7 +9,7 @@ L'object de celui-ci est de pouvoir facilement ajouter de nouveaux articles sur 
 ## A propos du projet ##
 Afin que tout fonctionne correctement il faudra lier votre dépôt github correspondant à votre pc à l'aide d'une clé ssh. Pour se faire, suivre les étapes énnoncées dans la partie [Set up 'git push' with an ssh key](#ssh-key).
 
-Une fois cela fait et le dépôt cloné sur votre machine, vous n'aurez plus qu'à ouvrir le projet, définir un chemin adéquat (`setLocalRepository` dans la classe `main`) permettant au programme de se rendre dans le dossier `your-path-from-home/project-ACDC/BLOG/`.
+Une fois cela fait et le dépôt cloné sur votre machine, vous n'aurez plus qu'à ouvrir le projet, définir un chemin adéquat (`setLocalRepository()` dans la classe `main`) permettant au programme de se rendre dans le dossier `your-path-from-home/project-ACDC/BLOG/`.
 
 Vous pouvez désormais lancer le programme, celui-ci fonctionnera correctement si vous avez bien installé jekyll et bien rentré une clé ssh pour votre dépôt GitHub.
 
