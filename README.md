@@ -17,6 +17,8 @@ On y retrouve donc :
 - une classe `Tools` qui fournit l'ensemble des méthodes permettant de gérer notre programme, comme par exemple la méthode qui permet d'écrire un fichier, ou celle permettant d'exécuter une méthode...
 - une classe `Post` dans laquelle on stocke les différentes informations liées au nouveau poste créé comme par exemple son titre, son auteur, son contenu...
 
+**********
+
 ### Mise en place ###
 Afin que tout fonctionne correctement il faudra lier votre dépôt github correspondant à votre pc à l'aide d'une clé ssh. Pour se faire, suivre les étapes énnoncées dans la partie [Set up 'git push' with an ssh key](#ssh-key).
 
@@ -60,3 +62,27 @@ git add -A
 git commit -am "my update msg"
 git push
 ```
+
+**********
+
+### Logs ###
+__10/10/2018 :__
+Première réunion avec le groupe travaillant sur le projet. Analyse et compréhension du sujet + première mise en place d’un diagramme UML. Également, un petit travail de documentation sur les outils Git et Jekyll ainsi que sur le langage Markdown. Première réunion avec le professeur référent organisée pour le 11/10/2018.
+
+__17/10/2018 :__
+Mise en place de la création du fichier .markdown.
+
+__24/10/2018 :__
+Documentation et étude sur la mise en place des commandes `bundle exec jekyll serve -o`, `git add .`, `git commit -m "..."`, `git push`.
+
+__31/10/2018 :__
+Validation d'une API commune au groupe de travail et dépôt du premier rendu sur le site intranet de l'école. La commande `bundle exec jekyll serve -o` devrait marcher mais je n'arrive pas à la lancer depuis eclipse. 
+
+__07/11/2018 :__
+Une réunion avec le groupe a été faite le 06/11/2018 afin de faire un point sur ce qui a été fait, et de se mettre d’accord sur une api finale. Réalisation d'un nouveau diagramme de classe et modification du programme afin qu'il s'adapte au nouveau diagramme mit en place. 
+
+__14/11/2018 :__
+Correction du bug empêchant la commande `bundle exec jekyll serve -o` de se lancer.
+
+__21/11/2018 :__
+Mise en place et test des commandes permettant de `git push` et documentation du programme sur le dépôt GitHub. Tout fonctionne correctement, le programme peut être utilisé par n'importe qui. 
