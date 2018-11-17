@@ -12,6 +12,8 @@ Le but du projet est de pouvoir facilement ajouter de nouveaux articles sur un s
 
 J'ai choisi d'implémenter une solution qui se base sur le diagramme de classe suivant : 
 ![alt-text](diagramme-de-classe.png)
+
+
 On y retrouve donc :
 - une classe `Main` dans laquelle se trouvent la méthode `main`, les différents appels aux méthodes implémentées dans les deux autres classes sont fait dans celle-ci. 
 - une classe `Tools` qui fournit l'ensemble des méthodes permettant de gérer notre programme, comme par exemple la méthode qui permet d'écrire un fichier, ou celle permettant d'exécuter une méthode...
