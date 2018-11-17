@@ -11,7 +11,7 @@
 Le but du projet est de pouvoir facilement ajouter de nouveaux articles sur un site web utilisant jekyll (plus d'informations sur https://jekyllrb.com).
 
 J'ai choisi d'implémenter une solution qui se base sur le diagramme de classe suivant : 
-![alt-text](https://github.com/acoudray1/project-ACDC/diagramme-de-classe.png)
+![alt-text](diagramme-de-classe.png)
 
 
 ### Mise en place ###
