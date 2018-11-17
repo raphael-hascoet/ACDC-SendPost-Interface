@@ -1,9 +1,9 @@
 # project-ACDC
 
-## static / dynamic website ##
+## Site web statique dynamique ##
 
-*This project is part of my one year study as a software engineer at the IMT ATLANTIQUE (France, Nantes).*
+*Ce projet est réalisé dans le cadre d'un projet de première année (SEMESTRE 1) en tant qu'ingénieur logiciel à l'IMT ATLANTIQUE (France, Nantes).*
 
-The goal of this project is to easily make new entries on a website built on top of the jekyll solution (more information on https://jekyllrb.com).
+L'object de celui-ci est de pouvoir facilement ajouter de nouveaux articles sur un site web utilisant jekyll (plus d'informations sur https://jekyllrb.com) 
 
-This is a test for ssh key.
+## A propos du projet
