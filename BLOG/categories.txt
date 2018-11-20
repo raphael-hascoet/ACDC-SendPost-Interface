@@ -1,5 +1,3 @@
 post
 news
 test
-
-bonjour
