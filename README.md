@@ -30,7 +30,6 @@ Une fois cela fait et le dépôt cloné sur votre machine, vous avez deux choix 
 
 **********
 
-{#configure-your-project}
 ### Configurer le programme pour son propre pc ### 
 __Premièrement :__ il faudra commenter les lignes indiquées dans les commentaires des classes `Main` et `Tools` (lignes utilisées pour le fonctionnement du fichier .jar) et dé-commenter les lignes indiquées (afin de définir le 'path' pour un fonctionnement dans le terminal d'eclipse).
 
