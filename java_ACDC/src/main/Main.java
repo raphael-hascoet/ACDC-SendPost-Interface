@@ -58,12 +58,10 @@ public class Main {
 		outil.writeFile(post.toMarkdown(), post.getTitle(), post.getDate(), markdownFilePath);
 		
 		// AFFICHAGE DE LA DEMO
-		outil.executeCommand("bundle exec jekyll serve -o", outil.getLocalRepository(), true);
+		outil.execJekyll();
 		
 		// GIT PUSH THE BLOG FILE 
-		outil.executeCommand("git add .", outil.getLocalRepository(), false);
-		outil.executeCommand("git commit -m \"new article\"", outil.getLocalRepository(), false);
-		outil.executeCommand("git push", outil.getLocalRepository(), false);
+		outil.gitPush();
 		
 		// ENDING THE PROGRAM
 		System.exit(0);

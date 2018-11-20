@@ -186,4 +186,20 @@ public class Tools {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Method using executeCommand() in order to execute jekyll serve -o
+	 */
+	public void execJekyll() {
+		this.executeCommand("bundle exec jekyll serve -o", this.getLocalRepository(), true);
+	}
+	
+	/**
+	 * 
+	 */
+	public void gitPush() {
+		this.executeCommand("git add .", this.getLocalRepository(), false);
+		this.executeCommand("git commit -m \"new article\"", this.getLocalRepository(), false);
+		this.executeCommand("git push", this.getLocalRepository(), false);
+	}
 }
