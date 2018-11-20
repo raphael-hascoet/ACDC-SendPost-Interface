@@ -30,7 +30,8 @@ Une fois cela fait et le dépôt cloné sur votre machine, vous avez deux choix 
 
 **********
 
-### Configurer le programme pour son propre pc ### {#configure-your-project}
+{#configure-your-project}
+### Configurer le programme pour son propre pc ### 
 __Premièrement :__ il faudra commenter les lignes indiquées dans les commentaires des classes `Main` et `Tools` (lignes utilisées pour le fonctionnement du fichier .jar) et dé-commenter les lignes indiquées (afin de définir le 'path' pour un fonctionnement dans le terminal d'eclipse).
 
 __Deuxièmement :__ définir un chemin adéquat dans l'objet `Tools outil` créé dans la classe `Main` permettant au programme de se rendre dans le dossier `your-path-from-home/project-ACDC/BLOG/`.
