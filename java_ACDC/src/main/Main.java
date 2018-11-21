@@ -16,7 +16,7 @@ public class Main {
 		// CREATION DES OBJETS
 		// Uncomment the next line if you want to try without doing .jar file
 		// Change the name of the path so the program can acces to your '/project-ACDC/BLOG/'
-		//Tools outil = new Tools("/home/axelc/IMT-A/developpement/project-ACDC/BLOG/");
+		// Tools outil = new Tools("/home/axelc/IMT-A/developpement/project-ACDC/BLOG/");
 		
 		// Comment the two next lines to try without doing .jar file
 		String currentDirectory = System.getProperty("user.dir");

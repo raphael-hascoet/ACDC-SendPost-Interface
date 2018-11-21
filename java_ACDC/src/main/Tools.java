@@ -90,10 +90,10 @@ public class Tools {
 			try
 			{
 				// Uncomment the next line if you want to try without doing .jar file
-				//BufferedWriter bw = new BufferedWriter(new FileWriter(".." + File.separator + "BLOG" + File.separator + "categories.txt", true));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(".." + File.separator + "BLOG" + File.separator + "categories.txt", true));
 				
 				// Comment the next line if you want to try without doing .jar file
-				BufferedWriter bw = new BufferedWriter(new FileWriter(this.localRepository + File.separator + "categories.txt", true));
+				// BufferedWriter bw = new BufferedWriter(new FileWriter(this.localRepository + File.separator + "categories.txt", true));
 				bw.append(c+"\n");
 			    bw.close();
 			}
@@ -113,7 +113,7 @@ public class Tools {
 		try
 		{
 			// Uncomment the next line if you want to try without doing .jar file
-			//BufferedReader reader = new BufferedReader(new FileReader(".." + File.separator + "BLOG" + File.separator + "categories.txt"));
+			// BufferedReader reader = new BufferedReader(new FileReader(".." + File.separator + "BLOG" + File.separator + "categories.txt"));
 			
 			// Comment the next line if you want to try without doing .jar file
 			BufferedReader reader = new BufferedReader(new FileReader(this.localRepository + File.separator + "categories.txt"));
@@ -138,10 +138,12 @@ public class Tools {
 	// Consumes an input stream
 	private static class StreamGobbler implements Runnable {
 	    private InputStream inputStream;
+	    private InputStream errorStream;
 	    private Consumer<String> consumer;
-	    public StreamGobbler(InputStream inputStream, Consumer<String> consumer) {
+	    public StreamGobbler(InputStream inputStream, Consumer<String> consumer, InputStream errorStream) {
 	        this.inputStream = inputStream;
 	        this.consumer = consumer;
+	        this.errorStream = errorStream;
 	    }		 
 	    @Override
 	    public void run() {
@@ -168,7 +170,7 @@ public class Tools {
 		builder.directory(new File(Path));
 		try {
 			Process process = builder.start();
-			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println);		
+			StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), System.out::println, process.getErrorStream());		
 			Executors.newSingleThreadExecutor().submit(streamGobbler);
 			TimeUnit.SECONDS.sleep(3);
 			if(stopThread == true) {
