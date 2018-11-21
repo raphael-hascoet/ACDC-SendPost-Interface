@@ -3,6 +3,6 @@ layout: post
 title: "test" 
 date: 2018-11-21 
 categories: test
-author: Axel COUDRAY 
+author: Axel 
 ---
 this is a test
