@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class Tools {
 	
 	private String localRepository; 
-	
+		
 	public Tools(String localRepo) {
 		this.localRepository = localRepo;
 	}
@@ -80,6 +80,19 @@ public class Tools {
 		}
 	}
 	
+	public void setCategories(List<String> categories){
+		try
+		{
+			BufferedWriter bw = new BufferedWriter(new FileWriter(this.localRepository + File.separator + "categories.txt", false));
+			for(String category: categories)
+				bw.append(category+"\n");
+		    bw.close();
+		}
+		catch (Exception e)
+		{
+		    e.printStackTrace();
+		}	
+	}
 	/** 
 	 * Method to add a category to a .txt File 
 	 * @param c - String of the new category to add
@@ -90,10 +103,10 @@ public class Tools {
 			try
 			{
 				// Uncomment the next line if you want to try without doing .jar file
-				BufferedWriter bw = new BufferedWriter(new FileWriter(".." + File.separator + "BLOG" + File.separator + "categories.txt", true));
+				//BufferedWriter bw = new BufferedWriter(new FileWriter(".." + File.separator + "BLOG" + File.separator + "categories.txt", true));
 				
 				// Comment the next line if you want to try without doing .jar file
-				// BufferedWriter bw = new BufferedWriter(new FileWriter(this.localRepository + File.separator + "categories.txt", true));
+				BufferedWriter bw = new BufferedWriter(new FileWriter(this.localRepository + File.separator + "categories.txt", true));
 				bw.append(c+"\n");
 			    bw.close();
 			}
@@ -174,10 +187,10 @@ public class Tools {
 			Executors.newSingleThreadExecutor().submit(streamGobbler);
 			TimeUnit.SECONDS.sleep(3);
 			if(stopThread == true) {
-				System.out.println("Press enter to stop demo");
+				/*System.out.println("Press enter to stop demo");
 				System.in.read();
 				System.out.println("process destroyed");
-				process.destroy();
+				process.destroy();*/
 			} else {
 				int exitCode = process.waitFor();
 				assert exitCode == 0;
@@ -204,4 +217,9 @@ public class Tools {
 		this.executeCommand("git commit -m \"new article\"", this.getLocalRepository(), false);
 		this.executeCommand("git push", this.getLocalRepository(), false);
 	}
+
+	public void killJekyllProcess() {
+		this.executeCommand("taskkill /IM \"ruby.exe\" /F", System.getProperty("user.dir"), false);
+	}
+
 }

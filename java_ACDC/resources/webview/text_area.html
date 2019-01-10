@@ -1,0 +1,170 @@
+<html>
+
+<head>
+    <link href="resources/quill.snow.css" rel="stylesheet">
+    <link href="resources/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/bootstrap-chosen.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <form id="infos">
+        <div class="form-inline">
+            <input class="form-control infos-input" type="text" name="title" placeholder="Title" id="input-title">
+            <input class="form-control infos-input" type="text" name="author" placeholder="Author" id="input-author">
+            <input class="btn btn-secondary" type="button" name="settings" value="General settings" id="button-settings">
+        </div>
+        <div class="form-inline">
+            <select class="md-8" multiple data-placeholder="Select categories..." name="categories" id="select-categories"></select>
+            <input class="btn btn-primary" type="button" name="add-category" value="Manage categories" id="button-categories">
+        </div>
+    </form>
+    <div id="editor">
+    </div>
+    <div class="bottom-right-buttons" id="main-buttons">
+        <input class="btn btn-primary" type="button" name="post" value="Post" id="button-post">
+        <input class="btn btn-secondary" type="button" name="exit" value="Exit" id="button-exit">
+    </div>
+
+    <script src="resources/quill.js"></script>
+    <script src="resources/jquery-3.3.1.min.js"></script>
+    <script src="resources/chosen.jquery.min.js"></script>
+    <script src="resources/turndown.js"></script>
+    <script>
+        try {
+            var Delta = Quill.import('delta');
+
+            var app = app;
+
+            var startup = true;
+
+            $(function () {
+                updateCategories();
+
+                $("#button-settings").click(function() {
+                    app.openSettings()
+                })
+
+                $("#button-categories").click(function () {
+                    app.manageCategories()
+                })
+
+                $("body").on("click", ":not(.ql-tooltip) a", function () {
+                    return false;
+                })
+                $("body").on("click", ".ql-tooltip a", function () {
+                    app.openLink($(this).attr('href'));
+                    return false;
+                })
+
+                $("#button-post").on("click", function () {
+                    var post = objectifyForm($("#infos").serializeArray())
+                    post["content"] = quillGetHTML(quill.getContents())
+                    app.sendPost(JSON.stringify(post));
+                })
+
+                $("#button-exit").on("click", function () {
+                    app.exit()
+                })
+
+                startup = false
+            })
+
+            var toolbarOptions = {
+                container: [
+                    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+                    ['blockquote', 'code-block'],
+
+                    [{
+                        'list': 'ordered'
+                    }, {
+                        'list': 'bullet'
+                    }],
+
+                    [{
+                        'header': [1, 2, 3, false]
+                    }],
+
+                    ['link', 'image'],
+
+                    ['clean'] // remove formatting button
+                ],
+                handlers: {
+                    image: function image() {
+                        var _this3 = this;
+
+                        var imageUrl = app.getImageUrl()
+
+                        app.log(imageUrl)
+
+                        var range = _this3.quill.getSelection(true);
+                        _this3.quill.updateContents(new Delta().retain(range.index).delete(
+                            range.length).insert({
+                            image: imageUrl
+                        }), Quill.sources.USER);
+                        _this3.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+                    }
+                }
+            };
+            var quill = new Quill("#editor", {
+                modules: {
+                    toolbar: toolbarOptions
+                },
+                theme: 'snow'
+            })
+        } catch (err) {
+            app.log("Error : " + err);
+        }
+
+        function objectifyForm(formArray) { //serialize data function
+
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++) {
+                if (returnArray[formArray[i]['name']] == undefined) {
+                    returnArray[formArray[i]['name']] = formArray[i]['value'];
+                } else {
+                    returnArray[formArray[i]['name']] += "," + formArray[i]['value'];
+                }
+            }
+            return returnArray;
+        }
+
+        function quillGetHTML(inputDelta) {
+            var tempCont = document.createElement("div");
+            (new Quill(tempCont)).setContents(inputDelta);
+            return tempCont.getElementsByClassName("ql-editor")[0].innerHTML;
+        }
+
+        function updateCategories() {
+            var oldVals = $('#select-categories').val()
+
+            $('#select-categories').empty()
+            JSON.parse(app.getCategories()).forEach(function (category) {
+            //var tab = ["Oui", "Non"]
+            //tab.forEach(function (category) {
+                $('#select-categories').append($('<option>', {
+                    value: category,
+                    text: category
+                }));
+            })
+
+            if (startup) {
+                $('#select-categories').chosen()
+            } else {
+                var newCategories = []
+                $('#select-categories option').each(function () {
+                    newCategories.push($(this).val())
+                })
+                app.log(oldVals)
+                app.log(newCategories)
+                var filteredVals = oldVals.filter(function (oldCategory) {
+                    return newCategories.includes(oldCategory)
+                })
+                $('#select-categories').val(filteredVals)
+                $('#select-categories').trigger("chosen:updated")
+            }
+        }
+    </script>
+</body>
+
+</html>

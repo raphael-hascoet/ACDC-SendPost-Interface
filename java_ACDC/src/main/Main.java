@@ -11,16 +11,15 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		// CREATION DES OBJETS
 		// Uncomment the next line if you want to try without doing .jar file
 		// Change the name of the path so the program can acces to your '/project-ACDC/BLOG/'
-		// Tools outil = new Tools("/home/axelc/IMT-A/developpement/project-ACDC/BLOG/");
+		Tools outil = new Tools("D:/Main/IMT/A1/AC_DC/workspace/Projet/web-master/BLOG");
 		
 		// Comment the two next lines to try without doing .jar file
-		String currentDirectory = System.getProperty("user.dir");
-		Tools outil = new Tools(currentDirectory + File.separator + "BLOG" + File.separator);
+		//String currentDirectory = System.getProperty("user.dir");
+		//Tools outil = new Tools(currentDirectory + File.separator + "BLOG" + File.separator);
 
 		// définition des variables necessaire à la classe "post"
 		String title = null; 

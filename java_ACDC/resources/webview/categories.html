@@ -1,0 +1,183 @@
+<html>
+
+<head>
+    <link href="resources/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="categories-content">
+        <ul class="list-group" id="categories-list"></ul>
+        <div id="categories-list-buttons">
+            <input class="btn btn-primary" type="button" name="add" value="Add" id="button-add-category">
+            <input class="btn btn-primary enabled-when-selected" type="button" name="modify" value="Modify" id="button-modify-category"
+                disabled>
+            <input class="btn btn-primary enabled-when-selected" type="button" name="remove" value="Remove" id="button-remove-category"
+                disabled>
+        </div>
+    </div>
+
+    <div class="bottom-right-buttons" id="categories-buttons">
+        <input class="btn btn-primary" type="button" name="ok" value="OK" id="categories-button-ok">
+        <input class="btn btn-secondary" type="button" name="cancel" value="Cancel" id="categories-button-cancel">
+    </div>
+
+    <script src="resources/jquery-3.3.1.min.js"></script>
+    <script src="resources/bootstrap.bundle.js"></script>
+    <script>
+        var nbCategoriesShown = 8;
+
+        var selected = false;
+        var editing = false;
+
+        // var categories = ["Oui", "Non", "Oui", "Non", "Oui", "Non", ]
+        var categories = JSON.parse(app.getCategories())
+
+        $(function () {
+            //  JSON.parse(app.getCategories()).forEach(function (category) {
+            drawCategories(categories);
+
+            $("#categories-list").on("click", "li:not(.empty)", function () {
+                setActiveCategory(this)
+            })
+            $("#categories-list").on("dblclick", "li:not(.empty)", function () {
+                var index = getCategoryIndex($(this))
+                modifyCategory($(this), function (val) {
+                    if (val != '') {
+                        categories[index] = val
+                    } else {
+                        removeCategory($(this))
+                    }
+                })
+            })
+            $("#categories-list").on("dblclick", ".empty", function () {
+                modifyCategory($(this), function (val) {
+                    if (val != '') {
+                        categories.push(val)
+                    }
+                })
+            })
+
+            $("#button-add-category").click(function () {
+                if (!editing) {
+                    if (categories.length >= nbCategoriesShown)
+                        addCategoryToList("")
+                    var firstEmpty = $("#categories-list .empty").first()
+                    modifyCategory(firstEmpty, function (val) {
+                        if (val != '') {
+                            categories.push(val)
+                        }
+                    })
+                }
+            })
+
+            $("#button-modify-category").click(function () {
+                var selectedCategory = $("#categories-list .active")
+                var currSelectedIndex = getCategoryIndex(selectedCategory);
+                modifyCategory(selectedCategory, function (val) {
+                    if (val != '') {
+                        categories[currSelectedIndex] = val
+                    } else {
+                        removeCategory($(this))
+                    }
+                })
+            })
+
+            $("#button-remove-category").click(function () {
+                var selectedCategory = $("#categories-list .active")
+                removeCategory(selectedCategory)
+            })
+
+
+            $("#categories-button-ok").click(function() {
+                app.sendCategories(JSON.stringify(categories))
+            })
+
+            $("#categories-button-cancel").click(function() {
+                app.cancel()
+            })
+
+        })
+
+        function drawCategories(categories) {
+            var displayedCategories = JSON.parse(JSON.stringify(categories))
+            $('#categories-list').empty()
+            while (displayedCategories.length < nbCategoriesShown) {
+                displayedCategories.push("")
+            }
+            displayedCategories.forEach(function (category) {
+                addCategoryToList(category)
+            })
+        }
+
+        function addCategoryToList(categoryStr) {
+            var itemCategory = $('<li>', {
+                    value: categoryStr,
+                })
+                .html(categoryStr)
+                .addClass("list-group-item").addClass("py-2");
+
+            if (categoryStr == "") {
+                itemCategory.addClass("empty");
+            }
+
+            $('#categories-list').append(itemCategory);
+        }
+
+        function modifyCategory(category, onInputLeave) {
+            editing = true;
+            clearActiveCategory()
+            var content = category.html()
+            category.empty();
+            category.append('<input type="text" class="form-control">');
+            var input = category.find("input");
+            input.val(content);
+            input.select();
+            input.on("focusout keypress", function (e) {
+                let trigger = false;
+                if (event.type == "keypress") {
+                    if (event.which == 13) {
+                        trigger = true;
+                    }
+                } else {
+                    trigger = true;
+                }
+                if (trigger) {
+                    onInputLeave($.trim(input.val()))
+                    drawCategories(categories)
+                    editing = false;
+                }
+            })
+        }
+
+        function removeCategory(category) {
+            categories.splice(getCategoryIndex(category), 1)
+            drawCategories(categories)
+            selected = false
+            $(".enabled-when-selected").prop("disabled", true);
+        }
+
+        function setActiveCategory(category) {
+            if (!selected) {
+                selected = true;
+                $(".enabled-when-selected").prop("disabled", false);
+            } else {
+                $(".active").removeClass("active");
+            }
+            $(category).addClass("active");
+        }
+
+        function clearActiveCategory() {
+            $(".active").removeClass("active");
+            $(".enabled-when-selected").prop("disabled", true);
+            selected = false;
+            selectedIndex = -1;
+        }
+
+        function getCategoryIndex(category) {
+            return $("#categories-list li").index(category);
+        }
+    </script>
+</body>
+
+</html>
