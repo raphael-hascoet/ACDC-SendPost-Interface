@@ -21,8 +21,7 @@ public class ChangeRepoHandler implements EventHandler<ActionEvent> {
 		File selectedDirectory = directoryChooser.showDialog(settingsWindow);
 		
 		if(selectedDirectory != null){
-			settingsWindow.tempRepo.set(selectedDirectory.getAbsolutePath());
-			settingsWindow.sizeToScene();
+			settingsWindow.setRepoFieldValue(selectedDirectory.getAbsolutePath());
 		}
 	}
 	

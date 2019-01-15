@@ -4,23 +4,21 @@ import intf.controller.CancelHandler;
 import intf.controller.ChangeRepoHandler;
 import intf.controller.OkSettingsHandler;
 import intf.model.PropertiesAccess;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class SettingsWindow extends Stage {
 	
-	public StringProperty tempRepo;
+	public TextField repoField;
 	
 	public SettingsWindow(){
-		tempRepo = new SimpleStringProperty(PropertiesAccess.getInstance().getLocalRepo());
 		
 		this.setTitle("Settings");
 		
@@ -29,8 +27,8 @@ public class SettingsWindow extends Stage {
 		Label lblRepo = new Label("Current local repository :");
 		lblRepo.setStyle("-fx-font-weight: bold;");
 		
-		Label lblCurrRepo = new Label(tempRepo.get());
-		lblCurrRepo.textProperty().bind(tempRepo);
+		repoField = new TextField(PropertiesAccess.getInstance().getLocalRepo());
+		repoField.setMinWidth(350);
 		
 		Button buttRepo = new Button("Change local repository");
 		buttRepo.setOnAction(new ChangeRepoHandler(this));
@@ -50,7 +48,7 @@ public class SettingsWindow extends Stage {
 		buttons.setSpacing(5);
 		buttons.setAlignment(Pos.BOTTOM_RIGHT);
 		
-		root.getChildren().addAll(lblRepo, lblCurrRepo, buttRepo, buttons);
+		root.getChildren().addAll(lblRepo, repoField, buttRepo, buttons);
 
 		root.setPadding(new Insets(10));
 		root.setSpacing(5);
@@ -61,6 +59,14 @@ public class SettingsWindow extends Stage {
 		this.setMinWidth(300);
 		
 		this.sizeToScene();
+	}
+	
+	public void setRepoFieldValue(String text){
+		repoField.setText(text);
+	}
+	
+	public String getRepoFieldValue(){
+		return repoField.getText();
 	}
 	
 }

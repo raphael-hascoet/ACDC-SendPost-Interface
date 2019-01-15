@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 
 import intf.Main;
 import intf.model.JSONTranslator;
+import intf.view.AddImageWindow;
 import intf.view.AlertDisplay;
 import intf.view.CategoriesWindow;
 import intf.view.MainWindow;
@@ -22,7 +23,7 @@ import main.Post;
 public class MainWebViewHandler extends WebViewHandler {
 
 	private MainWindow mainWindow;
-	
+		
 	public MainWebViewHandler(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
@@ -54,6 +55,14 @@ public class MainWebViewHandler extends WebViewHandler {
 	}
 	
 	public String getImageUrl(){
+		/*AddImageWindow addImageWindow = new AddImageWindow();
+		
+		addImageWindow.initModality(Modality.WINDOW_MODAL);
+		addImageWindow.initOwner(mainWindow);
+		
+		addImageWindow.showAndWait();
+		
+		return addImageWindow.getCurrentImage();*/
 		return AlertDisplay.enterImageUrl(mainWindow).get();
 	}
 	

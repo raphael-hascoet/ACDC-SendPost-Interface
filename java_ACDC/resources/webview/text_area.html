@@ -90,10 +90,10 @@
                     ['clean'] // remove formatting button
                 ],
                 handlers: {
-                    image: function image() {
+                    image: async function image() {
                         var _this3 = this;
 
-                        var imageUrl = app.getImageUrl()
+                        var imageUrl = await app.getImageUrl()
 
                         app.log(imageUrl)
 

@@ -15,7 +15,7 @@ public class OkSettingsHandler implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		PropertiesAccess.getInstance().setLocalRepo(settingsWindow.tempRepo.get());
+		PropertiesAccess.getInstance().setLocalRepo(settingsWindow.getRepoFieldValue());
 		settingsWindow.close();
 	}
 
